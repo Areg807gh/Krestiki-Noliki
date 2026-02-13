@@ -21,14 +21,14 @@ class Game(arcade.Window):
         self.count_green = 5
         self.count_blue = 5
 
-    def setup(self):
+    def setup(self): #Создаёт вертикальные и горизонтальные линии сетки.Линии добавляются в self.dots_list для последующей отрисовки.
         for i in range(5):
             x = 180 * (i + 1)
             y = 180 * (i + 1)
             self.dots_list.append(arcade.shape_list.create_line(x, 0, x, 900, arcade.color.BLACK, 5))
             self.dots_list.append(arcade.shape_list.create_line(0, y, 900, y, arcade.color.BLACK, 5))
 
-    def on_draw(self):
+    def on_draw(self): #Отрисовка
         self.clear()
         arcade.draw_rect_outline(arcade.rect.XYWH(1050, 500, 115, 115), arcade.color.BLACK, 4)
         arcade.draw_text("Игрок", 1020, 570, arcade.color.BLACK, 17)
@@ -75,7 +75,7 @@ class Game(arcade.Window):
         else:
             arcade.draw_triangle_outline(1000, 500 - 40, 1050, 545, 1050 + 50, 500 - 40, arcade.color.GREEN, 4)
 
-    def on_mouse_press(self, x, y, button, modifiers):
+    def on_mouse_press(self, x, y, button, modifiers): #Обработка кликов мыши.
         if self.game_over:
             return  # Игру уже выиграли
 
@@ -106,7 +106,7 @@ class Game(arcade.Window):
                             self.count_green = 0
                             self.grid[row][col] = 0
 
-        if button == arcade.MOUSE_BUTTON_RIGHT:
+        if button == arcade.MOUSE_BUTTON_RIGHT: #ПКМ - Удаления фигуры
             if self.grid[row][col] == self.current_player:
                 if self.grid[row][col] == 1:
                     self.grid[row][col] = 0
@@ -118,7 +118,7 @@ class Game(arcade.Window):
                     self.grid[row][col] = 0
                     self.count_green += 1
 
-        if all(cell != 0 for row in self.grid for cell in row):
+        if all(cell != 0 for row in self.grid for cell in row): #Ничья
             self.winner = 0
             self.game_over = True
 
