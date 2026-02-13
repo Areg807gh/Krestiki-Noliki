@@ -122,7 +122,7 @@ class Game(arcade.Window):
             self.winner = 0
             self.game_over = True
 
-    def check_winner(self):
+    def check_winner(self): #проверяет все горизонтали, вертикали и две диагонали на наличие пяти одинаковых символов. При нахождении устанавливает победителя и game_over.
         lines = []
 
         # Горизонтали и вертикали
